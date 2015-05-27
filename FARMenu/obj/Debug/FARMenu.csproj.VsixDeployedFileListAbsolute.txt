@@ -1,0 +1,4 @@
+C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.dll
+C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.pkgdef
+C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\FARMenu\1.0\\extension.vsixmanifest
+C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.pdb
