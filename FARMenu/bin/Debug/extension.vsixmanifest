@@ -4,8 +4,10 @@
     <DisplayName>FARMenu</DisplayName>
     <Description>Additional Find and Replace in folder in Solution Explorer</Description>
   </Metadata>
-  <Installation InstalledByMsi="false">
-    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />
+  <Installation InstalledByMsi="false" AllUsers="true">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0,]" />
+    <InstallationTarget Version="[12.0,]" Id="Microsoft.VisualStudio.Community" />
+    <InstallationTarget Version="[12.0,]" Id="Microsoft.VisualStudio.IntegratedShell" />
   </Installation>
   <Dependencies>
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" Version="[4.5,)" />
