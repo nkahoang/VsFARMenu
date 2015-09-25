@@ -43,15 +43,24 @@
 
       <Group guid="guidFARMenuCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
-        <!---<Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>-->
       </Group>
 
       <Group guid="guidFARMenuCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_FOLDERNODE"/>
-        <!---<Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>-->
       </Group>
 
+      <Group guid="guidFARMenuCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+      </Group>
 
+      <Group guid="guidFARMenuCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
+      </Group>
+
+      <!-- To do: Multiple find and replace
+      <Group guid="guidFARMenuCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_XPROJ_PROJITEM"/>
+      </Group> -->
     </Groups>
     
     <!--Buttons section. -->
@@ -75,6 +84,14 @@
         </Strings>
       </Button>
 
+      <Button guid="guidFARMenuCmdSet" id="nkahntReplaceIn" priority="0x0100" type="Button">
+        <Parent guid="guidFARMenuCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPicSearch" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+            <ButtonText>Replace in ...</ButtonText>
+        </Strings>
+      </Button>
 
 
     </Buttons>
@@ -105,6 +122,7 @@
 
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="nkahntFindIn" value="0x0100" />
+      <IDSymbol name="nkahntReplaceIn" value="0x0110" />
     </GuidSymbol>
     
     

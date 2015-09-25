@@ -29,7 +29,7 @@ namespace nkaHnt.FARMenu
     [PackageRegistration(UseManagedResourcesOnly = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [InstalledProductRegistration("FARMenu", "Find and Replace Extended Menu", "1.0", IconResourceID = 400)]
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(GuidList.guidFARMenuPkgString)]
@@ -68,11 +68,53 @@ namespace nkaHnt.FARMenu
             {
                 // Create the command for the menu item.
                 var FindInMenuId = new CommandID(GuidList.guidFARMenuCmdSet, (int)PkgCmdIDList.nkahntFindIn);
-                //MenuCommand menuItem = new MenuCommand(MenuItemCallback, menuCommandID );
-                var menuItem = new OleMenuCommand(MenuItemCallback, FindInMenuId);
-                menuItem.BeforeQueryStatus += menuItem_BeforeQueryStatus;
-                mcs.AddCommand( menuItem );
+                var ReplaceInMenuId = new CommandID(GuidList.guidFARMenuCmdSet, (int)PkgCmdIDList.nkahntReplaceIn);
+
+                var findMenuItem = new OleMenuCommand(FindMenuItemCallback, FindInMenuId);
+                findMenuItem.BeforeQueryStatus += menuItem_BeforeQueryStatus;
+
+                var replaceMenuItem = new OleMenuCommand(ReplaceMenuItemCallback, ReplaceInMenuId);
+                replaceMenuItem.BeforeQueryStatus += menuItem_BeforeQueryStatus;
+
+                mcs.AddCommand(findMenuItem);
+                mcs.AddCommand(replaceMenuItem);
             }
+        }
+
+        string getFindTarget(IVsHierarchy hierarchy, uint itemId)
+        {
+            // Get the file/directory path
+            string itemFullPath = null;
+
+            var vsProject = hierarchy as IVsProject;
+
+            if (vsProject == null && itemId == VSConstants.VSITEMID_ROOT)
+            {
+                var solution = Package.GetGlobalService(typeof(SVsSolution)) as IVsSolution;
+                string solutionFile = null;
+                string solutionUserFile = null;
+                solution.GetSolutionInfo(out itemFullPath, out solutionFile, out solutionUserFile);
+
+            }
+            else if (itemId == VSConstants.VSITEMID_ROOT)
+            {
+                string projectFullPath = null;
+                //this is selecting a project, not an item
+                vsProject.GetMkDocument(VSConstants.VSITEMID_ROOT, out projectFullPath);
+                itemFullPath = Path.GetDirectoryName(projectFullPath);
+            }
+            else
+            {
+                vsProject.GetMkDocument(itemId, out itemFullPath);
+            }
+
+            if (!Directory.Exists(itemFullPath) &&
+                !File.Exists(itemFullPath))
+            {
+                return null;
+            }
+            
+            return itemFullPath;
         }
 
         void menuItem_BeforeQueryStatus(object sender, EventArgs e)
@@ -88,18 +130,13 @@ namespace nkaHnt.FARMenu
 
                 IVsHierarchy hierarchy = null;
                 uint itemid = VSConstants.VSITEMID_NIL;
-
+                
                 if (!IsSingleProjectItemSelection(out hierarchy, out itemid)) return;
-                // Get the file path
-                string itemFullPath = null;
-                ((IVsProject)hierarchy).GetMkDocument(itemid, out itemFullPath);
-
-                if (!Directory.Exists(itemFullPath) &&
-                    !File.Exists(itemFullPath))
+                
+                if (string.IsNullOrEmpty(getFindTarget(hierarchy, itemid)))
                 {
                     return;
                 }
-
                 
                 menuCommand.Visible = true;
                 menuCommand.Enabled = true;
@@ -128,6 +165,11 @@ namespace nkaHnt.FARMenu
             {
                 hr = monitorSelection.GetCurrentSelection(out hierarchyPtr, out itemid, out multiItemSelect, out selectionContainerPtr);
 
+                if (hierarchyPtr == IntPtr.Zero && itemid == VSConstants.VSITEMID_ROOT) //solution selected
+                {
+                    return true;
+                }
+
                 if (ErrorHandler.Failed(hr) || hierarchyPtr == IntPtr.Zero || itemid == VSConstants.VSITEMID_NIL)
                 {
                     // there is no selection
@@ -139,7 +181,7 @@ namespace nkaHnt.FARMenu
 
                 // there is a hierarchy root node selected, thus it is not a single item inside a project
 
-                if (itemid == VSConstants.VSITEMID_ROOT) return false;
+                //if (itemid == VSConstants.VSITEMID_ROOT) return false;
 
                 hierarchy = Marshal.GetObjectForIUnknown(hierarchyPtr) as IVsHierarchy;
                 if (hierarchy == null) return false;
@@ -169,12 +211,20 @@ namespace nkaHnt.FARMenu
         }
         #endregion
 
+        private void FindMenuItemCallback(object sender, EventArgs e)
+        {
+            MenuItemCallback(sender, e, "Edit.FindInFiles");
+        }
+        private void ReplaceMenuItemCallback(object sender, EventArgs e)
+        {
+            MenuItemCallback(sender, e, "Edit.ReplaceInFiles");
+        }
         /// <summary>
         /// This function is the callback used to execute a command when the a menu item is clicked.
         /// See the Initialize method to see how the menu item is associated to this function using
         /// the OleMenuCommandService service and the MenuCommand class.
         /// </summary>
-        private void MenuItemCallback(object sender, EventArgs e)
+        private void MenuItemCallback(object sender, EventArgs e, string command)
         {
 
             IVsHierarchy hierarchy = null;
@@ -182,11 +232,9 @@ namespace nkaHnt.FARMenu
 
             if (!IsSingleProjectItemSelection(out hierarchy, out itemid)) return;
             // Get the file path
-            string itemFullPath = null;
-            ((IVsProject)hierarchy).GetMkDocument(itemid, out itemFullPath);
+            string itemFullPath = getFindTarget(hierarchy, itemid);
 
-            if (!Directory.Exists(itemFullPath) &&
-                !File.Exists(itemFullPath))
+            if (string.IsNullOrWhiteSpace(itemFullPath))
             {
                 return;
             }
@@ -198,7 +246,7 @@ namespace nkaHnt.FARMenu
 
             findWindow.SearchPath = itemFullPath;
             findWindow.Action = vsFindAction.vsFindActionFindAll;
-            dte.ExecuteCommand("Edit.FindInFiles");
+            dte.ExecuteCommand(command);
         }
 
     }

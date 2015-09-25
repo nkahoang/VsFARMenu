@@ -2,3 +2,7 @@ C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\F
 C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.pkgdef
 C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\FARMenu\1.0\\extension.vsixmanifest
 C:\Users\nkahnt\AppData\Local\Microsoft\VisualStudio\12.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.pdb
+C:\Users\nkahoang\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.dll
+C:\Users\nkahoang\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.pkgdef
+C:\Users\nkahoang\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\nkaHnt\FARMenu\1.0\\extension.vsixmanifest
+C:\Users\nkahoang\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\nkaHnt\FARMenu\1.0\\FARMenu.pdb
