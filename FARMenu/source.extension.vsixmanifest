@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="85caa711-8e6b-45a7-bc6c-afbc56605309" Version="1.0" Language="en-US" Publisher="nkaHnt" />
-    <DisplayName>FARMenu</DisplayName>
+    <DisplayName>FARMenu (Find and Replace)</DisplayName>
     <Description xml:space="preserve">Adding context menus to quickly open Find and Replace dialog in folder, project or solution in Solution Explorer</Description>
     <MoreInfo>https://github.com/nkahoang/VsFARMenu</MoreInfo>
     <Icon>Resources\icon.png</Icon>
