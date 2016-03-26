@@ -1,20 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-    <Metadata>
-        <Identity Id="85caa711-8e6b-45a7-bc6c-afbc56605309" Version="1.0" Language="en-US" Publisher="nkaHnt" />
-        <DisplayName>FARMenu</DisplayName>
-        <Description>Additional Find and Replace in folder in Solution Explorer</Description>
-    </Metadata>
-    <Installation InstalledByMsi="false" AllUsers="true">
-        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0,]" />
-        <InstallationTarget Version="[12.0,]" Id="Microsoft.VisualStudio.Community" />
-        <InstallationTarget Version="[12.0,]" Id="Microsoft.VisualStudio.IntegratedShell" />
-    </Installation>
-    <Dependencies>
-        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
-        <Dependency Id="Microsoft.VisualStudio.MPF.12.0" DisplayName="Visual Studio MPF 12.0" d:Source="Installed" Version="[12.0]" />
-    </Dependencies>
-    <Assets>
-        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-    </Assets>
+  <Metadata>
+    <Identity Id="85caa711-8e6b-45a7-bc6c-afbc56605309" Version="1.0" Language="en-US" Publisher="nkaHnt" />
+    <DisplayName>FARMenu</DisplayName>
+    <Description xml:space="preserve">Adding context menus to quickly open Find and Replace dialog in folder, project or solution in Solution Explorer</Description>
+    <MoreInfo>https://github.com/nkahoang/VsFARMenu</MoreInfo>
+    <Icon>Resources\icon.png</Icon>
+    <PreviewImage>Resources\preview.png</PreviewImage>
+    <Tags>Find and Replaces</Tags>
+  </Metadata>
+  <Installation InstalledByMsi="false" AllUsers="true">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0,]" />
+    <InstallationTarget Version="[12.0,]" Id="Microsoft.VisualStudio.Community" />
+    <InstallationTarget Version="[12.0,]" Id="Microsoft.VisualStudio.IntegratedShell" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    <Dependency Id="Microsoft.VisualStudio.MPF.12.0" DisplayName="Visual Studio MPF 12.0" d:Source="Installed" Version="[12.0]" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+  </Assets>
 </PackageManifest>
